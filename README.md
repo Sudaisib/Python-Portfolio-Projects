@@ -61,7 +61,7 @@ Each project includes a well-documented `README`, source code, visualizations, a
 * Correlation heatmaps to detect suspicious variable relationships
 
 🛠 **Tools**: Python, Pandas, NumPy, Matplotlib, Seaborn
-📖 **[View Project](https://github.com/yourusername/Fraud-Detection-Analysis)**
+📖 **[View Project](https://github.com/Sudaisib/Python-Portfolio-Projects/tree/main/Fraud%20Detection%20Analysis)**
 
 ---
 
