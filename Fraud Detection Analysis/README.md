@@ -14,13 +14,14 @@
 3. [🛠 Tools & Technologies](#-tools--technologies)
 4. [🔍 Data Cleaning](#-data-cleaning)
 5. [📈 Exploratory Data Analysis (EDA)](#-exploratory-data-analysis-eda)
-6. [🚨 Key Insights](#-key-insights)
-7. [💡 Recommendations](#-recommendations)
-8. [🔧 Future Enhancements](#-future-enhancements)
-9. [📝 Limitations](#-limitations)
-10. [🧪 Python Notebook Access](#-python-notebook-access)
-11. [👨‍💻 Author](#-author)
-12. [📌 License](#-license)
+6. [📊 Pandas Analysis Questions & Visualizations: Fraud Detection EDA](#-pandas-analysis-questions--visualizations-fraud-detection-eda)
+7. [🚨 Key Insights](#-key-insights)
+8. [💡 Recommendations](#-recommendations)
+9. [🔧 Future Enhancements](#-future-enhancements)
+10. [📝 Limitations](#-limitations)
+11. [🧪 Python Notebook Access](#-python-notebook-access)
+12. [👨‍💻 Author](#-author)
+13. [📌 License](#-license)
 
 ---
 
@@ -74,6 +75,125 @@ Major visual explorations and patterns included:
 * Correlation heatmaps to detect multicollinearity
 * Box plots and violin plots to explore feature distributions
 * Analysis of high-frequency account behaviors
+
+---
+
+## 🧠 Pandas Analysis Questions & Visualizations: Fraud Detection EDA
+
+```python
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+
+# Ensure timestamp is in datetime format
+df_cleaned['Timestamp'] = pd.to_datetime(df_cleaned['Timestamp'])
+
+# 1. Distribution of Transaction Amount
+plt.figure(figsize=(8, 6))
+sns.histplot(df_cleaned['Transaction_Amount'], bins=30, kde=True, color='skyblue')
+plt.title('Distribution of Transaction Amount')
+plt.xlabel('Transaction Amount')
+plt.ylabel('Frequency')
+plt.show()
+
+# 2. Transaction Type Count
+plt.figure(figsize=(8, 6))
+sns.countplot(data=df_cleaned, x='Transaction_Type', palette='Set2')
+plt.title('Transaction Type Count')
+plt.xlabel('Transaction Type')
+plt.ylabel('Count')
+plt.xticks(rotation=45)
+plt.show()
+
+# 3. Fraud Distribution (Fraud vs Not Fraud)
+plt.figure(figsize=(8, 6))
+sns.countplot(data=df_cleaned, x='Fraud_Label', palette='pastel')
+plt.title('Fraud Distribution')
+plt.xlabel('Fraud Label (0 = Not Fraud, 1 = Fraud)')
+plt.ylabel('Count')
+plt.show()
+
+# 4. Fraud by Transaction Type
+plt.figure(figsize=(10, 6))
+sns.countplot(data=df_cleaned, x='Transaction_Type', hue='Fraud_Label', palette='Set1')
+plt.title('Fraud by Transaction Type')
+plt.xlabel('Transaction Type')
+plt.ylabel('Count')
+plt.xticks(rotation=45)
+plt.show()
+
+# 5. Average Transaction Amount by Fraud
+plt.figure(figsize=(8, 6))
+sns.boxplot(data=df_cleaned, x='Fraud_Label', y='Transaction_Amount', palette='muted')
+plt.title('Average Transaction Amount by Fraud')
+plt.xlabel('Fraud Label (0 = Not Fraud, 1 = Fraud)')
+plt.ylabel('Transaction Amount')
+plt.show()
+
+# 6. Risk Score Distribution
+plt.figure(figsize=(8, 6))
+sns.histplot(df_cleaned['Risk_Score'], bins=30, kde=True, color='coral')
+plt.title('Risk Score Distribution')
+plt.xlabel('Risk Score')
+plt.ylabel('Frequency')
+plt.show()
+
+# 7. Transaction Amount vs Risk Score
+plt.figure(figsize=(8, 6))
+sns.scatterplot(data=df_cleaned, x='Transaction_Amount', y='Risk_Score', hue='Fraud_Label', palette='coolwarm')
+plt.title('Transaction Amount vs Risk Score')
+plt.xlabel('Transaction Amount')
+plt.ylabel('Risk Score')
+plt.show()
+
+# 8. Fraud by Device Type
+plt.figure(figsize=(8, 6))
+sns.countplot(data=df_cleaned, x='Device_Type', hue='Fraud_Label', palette='Set3')
+plt.title('Fraud by Device Type')
+plt.xlabel('Device Type')
+plt.ylabel('Count')
+plt.xticks(rotation=45)
+plt.show()
+
+# 9. Fraud by Merchant Category
+plt.figure(figsize=(10, 6))
+sns.countplot(data=df_cleaned, x='Merchant_Category', hue='Fraud_Label', palette='coolwarm')
+plt.title('Fraud by Merchant Category')
+plt.xlabel('Merchant Category')
+plt.ylabel('Count')
+plt.xticks(rotation=45)
+plt.show()
+
+# 10. Fraud by Location
+plt.figure(figsize=(12, 8))
+sns.countplot(data=df_cleaned, x='Location', hue='Fraud_Label', palette='Set1')
+plt.title('Fraud by Location')
+plt.xlabel('Location')
+plt.ylabel('Count')
+plt.xticks(rotation=45)
+plt.show()
+
+# 11. Fraud by Month
+df_cleaned['Month'] = df_cleaned['Timestamp'].dt.month_name()
+plt.figure(figsize=(12, 8))
+sns.countplot(data=df_cleaned, x='Month', hue='Fraud_Label', palette='Paired')
+plt.title('Fraud by Month')
+plt.xlabel('Month')
+plt.ylabel('Count')
+plt.xticks(rotation=45)
+plt.show()
+
+# 12. Fraud by Time of Day
+df_cleaned['Hour'] = df_cleaned['Timestamp'].dt.hour
+plt.figure(figsize=(12, 8))
+sns.countplot(data=df_cleaned, x='Hour', hue='Fraud_Label', palette='coolwarm')
+plt.title('Fraud by Time of Day (Hour)')
+plt.xlabel('Hour of Day')
+plt.ylabel('Count')
+plt.xticks(rotation=45)
+plt.show()
+```
 
 ---
 
